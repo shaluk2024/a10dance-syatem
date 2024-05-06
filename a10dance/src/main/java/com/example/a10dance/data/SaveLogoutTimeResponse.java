@@ -18,7 +18,7 @@ public class SaveLogoutTimeResponse extends Response {
         return loginTime;
     }
 
-    public void setLoginTime(Date loginTime) {
+    public void setLoginTime(final Date loginTime) {
         this.loginTime = loginTime;
     }
 
@@ -27,7 +27,7 @@ public class SaveLogoutTimeResponse extends Response {
     }
 
 
-    public void setLogoutTime(Date logoutTime) {
+    public void setLogoutTime(final Date logoutTime) {
         this.logoutTime = logoutTime;
     }
 

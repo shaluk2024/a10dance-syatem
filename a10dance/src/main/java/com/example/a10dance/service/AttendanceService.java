@@ -34,13 +34,20 @@ public class AttendanceService {
         return response;
     }
 
-    public GetAttendanceSummaryResponse getAttendances(final GetAttendanceSummaryRequest request) {
+    public GetAttendanceSummaryResponse getAttendancesSummary(final GetAttendanceSummaryRequest request) {
         final var response = new GetAttendanceSummaryResponse();
 
+        int count = 0;
         for (final var attendance : attendanceRepository.findMonthlyAttendance()) {
+            if(count == 3){
+                break;
+            }
 
             response.addAttendance(new AttendanceSummary(attendance.getMonthYear()
                     , attendance.getWorkingHours()));
+            
+            count++;
+        
         }
 
         return response;
@@ -49,19 +56,18 @@ public class AttendanceService {
     public SaveLoginTimeResponse saveLoginTime(final SaveLoginTimeRequest request) {
         List<Attendance> attendances = attendanceRepository.findByLoginTime(request.getLoginTime());
 
-        System.out.println(request.getLoginTime());
 
         final var response = new SaveLoginTimeResponse();
 
 
         if (attendances.isEmpty()) {
-            Attendance attendance = new Attendance(request.getLoginTime(), getAutoLogoutTime(request.getLoginTime()), 0, getYear(request.getLoginTime()), getMonth(request.getLoginTime()));
-            Attendance savedAttendance = attendanceRepository.save(attendance);
+            Date autoLogoutTime = getAutoLogoutTime(request.getLoginTime());
+            long workingHours = calculateDuration(request.getLoginTime(), autoLogoutTime);
+            Attendance attendance = new Attendance(request.getLoginTime(), autoLogoutTime, workingHours, getYear(request.getLoginTime()), getMonth(request.getLoginTime()));
+            attendanceRepository.save(attendance);
 
-            System.out.println(savedAttendance.getLogoutTime());
-
-            response.setLoginTime(savedAttendance.getLoginTime());
-            response.setLogoutTime(savedAttendance.getLogoutTime());
+            response.setLoginTime(attendance.getLoginTime());
+            response.setLogoutTime(attendance.getLogoutTime());
 
             response.setMessage("Login successfully");
             response.setStatus(HttpStatus.OK.value());
@@ -81,12 +87,6 @@ public class AttendanceService {
 
         if (!attendances.isEmpty()) {
             final Attendance attendance = attendances.get(0);
-
-            System.out.println(attendance.getLogoutTime());
-            System.out.println(attendance.getLoginTime());
-            System.out.println(request.getLogoutTime());
-
-
 
             if (request.getLogoutTime() != null) {
                 attendance.setLogoutTime(request.getLogoutTime());
@@ -133,8 +133,6 @@ public class AttendanceService {
         calendar.set(Calendar.SECOND, 59);
         calendar.set(Calendar.MILLISECOND, 999);
         Date logoutTime = calendar.getTime();
-
-        System.out.println(logoutTime);
 
         return Date.from(logoutTime.toInstant());
     }

@@ -10,8 +10,9 @@ const Summary = () => {
 
   useEffect(() => {
     axios.get(baseURL).then((response) => {
+      console.log(response)
        
-        setData(response.data.attendances)
+        setData(response.data.attendanceSummaries)
       });
   
 

@@ -30,9 +30,12 @@ public class AttendancePopulator implements CommandLineRunner {
 
         final var attendances = Arrays.asList(new Attendance(sdf.parse("2024-01-05 09:30:00"), sdf.parse("2024-01-05 17:30:00"), 8, 2024, 1)
                 , new Attendance(sdf.parse("2024-01-06 09:30:00"), sdf.parse("2024-01-06 17:30:00"), 8, 2024, 1)
-                , new Attendance(sdf.parse("2024-02-05 09:30:00"), sdf.parse("2024-02-05 17:30:00"), 8,  2024,  2)
+                , new Attendance(sdf.parse("2024-02-05 10:30:00"), sdf.parse("2024-02-05 17:30:00"), 7,  2024,  2)
                 , new Attendance(sdf.parse("2024-02-06 09:30:00"), sdf.parse("2024-02-06 17:30:00"), 8,  2024, 2)
-                , new Attendance(sdf.parse("2024-03-07 09:30:00"), sdf.parse("2024-03-07 17:30:00"), 8, 2024, 3));
+                , new Attendance(sdf.parse("2024-03-07 10:30:00"), sdf.parse("2024-03-07 17:30:00"), 7, 2024, 3));
+                //, new Attendance(sdf.parse("2024-04-08 11:30:00"), sdf.parse("2024-04-08 17:30:00"), 6, 2024, 4)
+                //, new Attendance(sdf.parse("2024-04-09 09:00:00"), sdf.parse("2024-04-09 17:00:00"), 8, 2024, 4));
+
         attendanceRepository.saveAll(attendances);
     }
 

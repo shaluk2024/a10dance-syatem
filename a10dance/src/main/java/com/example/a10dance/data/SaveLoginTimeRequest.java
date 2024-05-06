@@ -9,7 +9,7 @@ public class SaveLoginTimeRequest {
         super();
     }
 
-    public SaveLoginTimeRequest(Date loginTime) {
+    public SaveLoginTimeRequest(final Date loginTime) {
         this.loginTime = loginTime;
     }
 

@@ -4,20 +4,21 @@ import com.example.a10dance.common.Response;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class GetAttendanceSummaryResponse extends Response {
 
-    private Collection<AttendanceSummary> attendances;
+    private List<AttendanceSummary> attendanceSummaries;
 
     public void addAttendance(final AttendanceSummary attendance) {
-        if (attendances == null) {
-            attendances = new ArrayList<>();
+        if (attendanceSummaries == null) {
+            attendanceSummaries = new ArrayList<>();
         }
 
-        attendances.add(attendance);
+        attendanceSummaries.add(attendance);
     }
 
-    public Collection<AttendanceSummary> getAttendances() {
-        return attendances;
+    public List<AttendanceSummary> getAttendanceSummaries() {
+        return attendanceSummaries;
     }
 }

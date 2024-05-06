@@ -3,6 +3,7 @@ package com.example.a10dance.domain;
 import java.io.Serial;
 import java.util.Date;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import jakarta.persistence.Column;
@@ -66,7 +67,7 @@ public class Attendance {
         return loginTime;
     }
 
-    public void setLoginTime(Date loginTime){
+    void setLoginTime(Date loginTime){
         if(loginTime == null){
             throw new NullPointerException("Login time is mandatory.");
         }
@@ -98,7 +99,7 @@ public class Attendance {
         return monthValue;
     }
 
-    public void setMonthValue(Integer monthValue) {
+    void setMonthValue(Integer monthValue) {
         if(monthValue == null){
             throw new NullPointerException("month is mandatory.");
         }
@@ -109,7 +110,7 @@ public class Attendance {
         return yearValue;
     }
 
-    public void setYearValue(Integer yearValue) {
+    void setYearValue(Integer yearValue) {
         if(yearValue == null){
             throw new NullPointerException("year is mandatory.");
         }

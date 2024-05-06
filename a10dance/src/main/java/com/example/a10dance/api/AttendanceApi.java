@@ -35,7 +35,7 @@ public class AttendanceApi {
     @GetMapping("/summary")
     public ResponseEntity<GetAttendanceSummaryResponse> getAttendancesSummary(final Date loginTime
             , final Date logoutTime) {
-        return ResponseEntity.ok(attendanceService.getAttendances(new GetAttendanceSummaryRequest(loginTime
+        return ResponseEntity.ok(attendanceService.getAttendancesSummary(new GetAttendanceSummaryRequest(loginTime
                 , logoutTime)));
     }
 
